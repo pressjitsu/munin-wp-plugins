@@ -30,7 +30,7 @@ active.draw AREA
 updatable.info Updatable 
 updatable.label updatable
 updatable.draw AREA
-updatable.warning 1
+updatable.warning 0
 updatable.critical 3''' % name)
 	sys.exit(0)
 
