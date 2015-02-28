@@ -21,12 +21,15 @@ graph_vlabel count
 
 total.info Total
 total.label total
+total.draw AREA
 
 active.info Active
 active.label active
+active.draw AREA
 
 updatable.info Updatable 
 updatable.label updatable
+updatable.draw AREA
 updatable.warning 1
 updatable.critical 3''' % name)
 	sys.exit(0)
