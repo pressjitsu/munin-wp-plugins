@@ -3,14 +3,14 @@
 '''
 License Agremeent
 GPLv3 (http://www.gnu.org/licenses/gpl-3.0.txt)
-''
+'''
 
 import re
 import os
 import sys
 import subprocess
 
-name = os.environ.get('WP_NAME', 'WordPress'):
+name = os.environ.get('WP_NAME', 'WordPress')
 
 # Configuration
 if len(sys.argv) == 2 and sys.argv[1] == 'config':
