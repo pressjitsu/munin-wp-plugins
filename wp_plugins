@@ -1,0 +1,42 @@
+#!/usr/bin/python2
+
+'''
+License Agremeent
+GPLv3 (http://www.gnu.org/licenses/gpl-3.0.txt)
+''
+
+import re
+import os
+import sys
+import subprocess
+
+name = os.environ.get('WP_NAME', 'WordPress'):
+
+# Configuration
+if len(sys.argv) == 2 and sys.argv[1] == 'config':
+	print('''graph_category wordpress
+graph_title %s plugin status
+graph_info Shows WordPress plugin count, activity and update status
+graph_vlabel count
+
+total.info Total
+total.label total
+
+active.info Active
+active.label active
+
+updatable.info Updatable 
+updatable.label updatable
+updatable.warning 1
+updatable.critical 3''' % name)
+	sys.exit(0)
+
+if not os.environ.get('WP_PATH', False):
+	sys.exit(-1) # bzzz, no path set
+
+p = re.compile(ur'^ ([ |U])([A|I|M])', re.MULTILINE)
+plugins = subprocess.check_output(['wp', '--path=%s' % os.environ.get('WP_PATH'), '--no-color', 'plugin', 'status'])
+plugins = re.findall(p, plugins)
+print('total.value %d' % len(plugins))
+print('active.value %d' % len(filter(lambda p: p[1] == 'A' or p[1] == 'M', plugins))) # Active and Must-Use
+print('updatable.value %d' % len(filter(lambda p: p[0] == 'U', plugins))) # Updatable
